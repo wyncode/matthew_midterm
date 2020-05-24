@@ -1,29 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { AppContextProvider } from './context/AppContext';
-import ContextDemo from './components/ContextDemo';
+import React from "react";
+import "./App.css";
+import {Navbar} from 'react-bootstrap';
+import Results from './components/Results';
+import Logo from './pictures/profile.png'
 
-import './App.css';
 
-const App = () => {
-  const [serverMessage, setServerMessage] = useState('');
-
-  const fetchDemoData = () => {
-    fetch('/api/demo')
-      .then((response) => response.json())
-      .then((data) => setServerMessage(data.message));
-  };
-
-  useEffect(fetchDemoData, []);
-
+function App() {
   return (
-    <AppContextProvider>
-      <div id="demo">
-        <h3>Hello from client/src/App.js</h3>
-        <ContextDemo />
-        <h3>{serverMessage}</h3>
-      </div>
-    </AppContextProvider>
-  );
-};
-
+    <>
+    <Navbar className="navbar">
+    <Navbar.Brand href="#home" className="navColor">
+      <img
+        alt=""
+        src={Logo}
+        width="50"
+        height="50"
+      />
+      Earnings Check
+    </Navbar.Brand>
+  </Navbar>
+  <Results/>
+  </>
+  )
+}
 export default App;

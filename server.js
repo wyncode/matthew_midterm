@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
+const axios = require('axios')
 const path = require('path');
 const app = express();
 
@@ -13,6 +14,15 @@ app.get('/api/demo', (request, response) => {
   });
 });
 // END DEMO
+
+app.get('/api/playerdata', async (request, response) => {
+     let {data} = await axios({
+          url: 'https://api.fortnitetracker.com/v1/profile/pc/tfue',
+          method: 'get',
+          headers: {'TRN-Api-Key': process.env.API_KEY}
+      })
+      response.send(data)
+});
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
