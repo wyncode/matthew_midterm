@@ -1,11 +1,7 @@
-/* JUST FOR DEMO PURPORSES, REPLACE WITH YOUR OWN CODE */
-
-#demo {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: space-around;
+.navColor{
   align-items: center;
 }
 
-/* END DEMO */
+.navbar{
+  background-color: grey;
+}
