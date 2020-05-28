@@ -1,28 +1,36 @@
 import React, {useState} from 'react';
 import axios from 'axios';
-
+import songT from '../audio/song.mp3'
 
 const Results = () => {
-  const [fortniteApi, setFortniteApi] = useState({}) 
-  const getApiData = async () => {
-   let {data} = await axios.get("/api/playerdata")
+  const [playerName, setPlayerName] = useState('')
+  const [fortniteApi, setFortniteApi] = useState({})
+  
+
+  const getApiData = async (event) => {
+    event.preventDefault()
+   let {data} = await axios.get(`/api/playerdata/${playerName}`)
    setFortniteApi(data, console.log(data))
   } 
     return(
       <>
+      <audio id="songVol" autoPlay >
+        <source src={songT} type="audio/mpeg">
+          
+        </source>
+      </audio>
         <h1>"Hi im the results page"</h1>
-       <button onClick={getApiData}>CLICK ME NOW and some shit</button>
+       <form onSubmit={getApiData}>
+         <input type="text" onChange={e => setPlayerName(e.target.value)}/>
+       <button onClick={getApiData}>CLICK ME NOW</button>
+       </form>
     <div>
         <p>
-        {fortniteApi.epicUserHandle}
+        {fortniteApi.name}
         </p>
         <p>
-        {fortniteApi.lifeTimeStats &&
-        fortniteApi.lifeTimeStats[11].key
-        }
-        {fortniteApi.lifeTimeStats &&
-        fortniteApi.lifeTimeStats[11].value
-        }
+        {fortniteApi.cashPrize}
+        
         </p>
         
     </div>

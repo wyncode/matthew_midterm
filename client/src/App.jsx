@@ -2,24 +2,15 @@ import React from "react";
 import "./App.css";
 import {Navbar} from 'react-bootstrap';
 import Results from './components/Results';
-import Logo from './pictures/profile.png'
-
+import Logo from './pictures/llama.jpg'
 
 function App() {
   return (
     <>
-    <Navbar className="navbar">
-    <Navbar.Brand href="#home" className="navColor">
-      <img
-        alt=""
-        src={Logo}
-        width="50"
-        height="50"
-      />
-      Earnings Check
-    </Navbar.Brand>
-  </Navbar>
+    <div className="backgroundPic">
+  
   <Results/>
+  </div>
   </>
   )
 }

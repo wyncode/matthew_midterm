@@ -1,7 +1,10 @@
-.navColor{
-  align-items: center;
+div {
+  background-image: url(./pictures/llama.jpg);
+  background-position: center;
+  position: fixed;
+  text-align: center;
+  min-width: 100%;
+  max-width: 100%;
+  background-size: cover;
 }
 
-.navbar{
-  background-color: grey;
-}
