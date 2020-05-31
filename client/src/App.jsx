@@ -7,11 +7,13 @@ import Logo from './pictures/llama.jpg'
 function App() {
   return (
     <>
-    <div className="backgroundPic">
+    
   
   <Results/>
-  </div>
+
   </>
   )
 }
+
+
 export default App;
