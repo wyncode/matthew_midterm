@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express');
-const axios = require('axios')
+const axios = require('axios');
 const path = require('path');
 const app = express();
 
@@ -16,15 +16,20 @@ app.get('/api/demo', (request, response) => {
 // END DEMO
 
 app.get('/api/playerdata/:playerName', async (request, response) => {
-  let uri = `https://api.fortnitetracker.com/v1/powerrankings/global/global/${request.params.playerName}`
+  let uri = `https://api.fortnitetracker.com/v1/powerrankings/global/global/${request.params.playerName}`;
   // let res = encodeURI(uri);
-  let {data} = await axios({
-          url: uri,
-          method: 'get',
-          headers: {'TRN-Api-Key': process.env.API_KEY}
-      })
-      response.send(data)
-});
+
+  try {
+    let { data } = await axios({
+      url: uri,
+      method: 'get',
+      headers: { 'TRN-Api-Key': process.env.API_KEY }
+    });
+    response.send(data);
+  } catch (e) {
+    res.send(e);
+  }
+}); 
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
