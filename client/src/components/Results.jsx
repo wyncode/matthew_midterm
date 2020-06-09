@@ -1,33 +1,42 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
-
+import songT from '../audio/song.mp3'
+import '../App.css';
+import ReactTypingEffect from 'react-typing-effect';
+import Button from 'react-bootstrap/Button'
 
 const Results = () => {
-  const [fortniteApi, setFortniteApi] = useState({}) 
-  const getApiData = async () => {
-   let {data} = await axios.get("/api/playerdata")
-   setFortniteApi(data, console.log(data))
-  } 
-    return(
-      <>
-        <h1>"Hi im the results page"</h1>
-       <button onClick={getApiData}>CLICK ME NOW and some shit</button>
-    <div>
-        <p>
-        {fortniteApi.epicUserHandle}
-        </p>
-        <p>
-        {fortniteApi.lifeTimeStats &&
-        fortniteApi.lifeTimeStats[11].key
-        }
-        {fortniteApi.lifeTimeStats &&
-        fortniteApi.lifeTimeStats[11].value
-        }
-        </p>
-        
-    </div>
+  const [playerName, setPlayerName] = useState('');
+  const [fortniteApi, setFortniteApi] = useState({});
+  const getApiData = async (event) => {
+    event.preventDefault();
+    let { data } = await axios.get(`/api/playerdata/${playerName}`);
+    setFortniteApi(data, console.log(data));
+  };
+  return (
+    <>
+      <div>
+        <h1>
+          <ReactTypingEffect text="Earning's Check"/>
+
+          
+        </h1>
+        <form className="center" onSubmit={getApiData}>
+          <input type="text" onChange={(e) => setPlayerName(e.target.value)} />
+          <Button variant="outline-info"onClick={getApiData}>RESULTS</Button>
+          <p>{fortniteApi.name}</p>
+        <p>${fortniteApi.cashPrize}</p>
+        </form>
+      </div>
+      <audio id="songVol" autoPlay>
+        <source src={songT} type="audio/mpeg"></source>
+      </audio>
+      <style>
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+</style>
+
     </>
-    )
-}
+  );
+};
 
 export default Results;
